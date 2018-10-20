@@ -21,7 +21,9 @@ public class ProblemSet3_5 {
 		
 		// test your solutions here
 		
-		ps.primes(1, 1000);
+		ps.testFunctions();
+		
+		// ps.primes(1, 1000);
 	}
 	
 	/**
@@ -36,7 +38,26 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void primes(int start, int end) {
+		int counter = 0;
+		Boolean prime;
 		
+		for (int between = start; between <= end; between++) {
+			
+			prime = true;
+			
+			for (int factor = 2; factor * factor <= between; factor++) {
+				if(between % factor == 0) {
+					prime = false;
+					break;
+				}
+			}
+			
+			prime = (between < 2) ? false : prime;
+			
+			if (prime) counter++; 
+		}
+		
+		System.out.println("There " + ((counter == 1) ? "is 1 prime number." : "are " + counter + " prime numbers."));
 	}
 	
 	/**
@@ -63,7 +84,35 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void palindromicNumbers(int number) {
+		int len = Integer.toString(number).length();
+		// will be the length of the array that stores digits
 		
+		int numberDivide = number;
+		
+		int[] iarray = new int[len];
+		// initializes array 
+		
+		
+		for (int index = 0; index < len; index++) {
+			
+		    iarray[index] = numberDivide % 10;
+		    
+		    numberDivide /= 10;
+		    
+		}
+		// for loop that stores each number in array 
+		
+		
+		for(int n = 0; n < len / 2; n++) {
+			
+			if(iarray[n] != iarray[len - 1 - n]) {
+				// if the opposite end numbers are unequal 
+				
+				System.out.println(number + " is not a palindromic number.");
+				return;
+			}
+		}
+		System.out.println(number + " is a palindromic number.");
 	}
 	
 	/**
@@ -91,6 +140,19 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void multiples(int x, int y, int limit) {
+		int totalSum = 0;
 		
+		for (int n = 0; n * x * y < limit; n++) {
+			totalSum += n * x * y;
+		}
+		
+		System.out.println("The sum is " + totalSum + ".");
+		
+	}
+	
+	public void testFunctions() {
+		primes(0, 234923);
+		multiples(1, 2, 5); 
+		palindromicNumbers(12322321);
 	}
 }
