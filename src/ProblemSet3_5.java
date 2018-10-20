@@ -71,6 +71,29 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void leapYears(int count) {
+		int yearCounter = 2018;
+		
+		while (yearCounter % 4 != 0) {
+			yearCounter++;
+		}
+		
+		if (count == 1) {
+			System.out.println("The next leap year is " + yearCounter + ".");
+			return;
+		}
+		else if (count == 2) {
+			System.out.println("The next 2 leap years are " + (yearCounter)
+					+ " and " + (yearCounter + 4 + "."));
+			return;
+		}
+		
+		System.out.print("The next " + count + " leap years are ");
+		
+		for (int x = 0; x < (count * 4) - 4; x+=4) {
+			System.out.print((yearCounter + x) + ", ");
+		}
+		System.out.println("and " + (yearCounter + ((count * 4) - 4)) + ".");
+		
 		
 	}
 	
@@ -90,13 +113,13 @@ public class ProblemSet3_5 {
 		
 		int numberDivide = number;
 		
-		int[] iarray = new int[len];
+		int[] digitsArray = new int[len];
 		// initializes array 
 		
 		
 		for (int index = 0; index < len; index++) {
 			
-		    iarray[index] = numberDivide % 10;
+		    digitsArray[index] = numberDivide % 10;
 		    
 		    numberDivide /= 10;
 		    
@@ -106,7 +129,7 @@ public class ProblemSet3_5 {
 		
 		for(int n = 0; n < len / 2; n++) {
 			
-			if(iarray[n] != iarray[len - 1 - n]) {
+			if(digitsArray[n] != digitsArray[len - 1 - n]) {
 				// if the opposite end numbers are unequal 
 				
 				System.out.println(number + " is not a palindromic number.");
@@ -129,6 +152,8 @@ public class ProblemSet3_5 {
 	
 	public void fibonacci(int n) {
 		
+		
+	
 	}
 	
 	/**
@@ -155,5 +180,6 @@ public class ProblemSet3_5 {
 		primes(0, 234923);
 		multiples(1, 2, 5); 
 		palindromicNumbers(12322321);
+		leapYears(20);
 	}
 }
