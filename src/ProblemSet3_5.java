@@ -84,6 +84,7 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void palindromicNumbers(int number) {
+		
 		int len = Integer.toString(number).length();
 		// will be the length of the array that stores digits
 		
