@@ -38,8 +38,9 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void primes(int start, int end) {
+		
 		int counter = 0;
-		Boolean prime;
+		boolean prime;
 		
 		for (int between = start; between <= end; between++) {
 			
@@ -72,16 +73,16 @@ public class ProblemSet3_5 {
 	
 	public void leapYears(int count) {
 		int yearCounter = 2018;
-		
-		while (yearCounter % 4 != 0) {
+		while (!isLeap(yearCounter)) {
 			yearCounter++;
 		}
+		
 		
 		if (count == 1) {
 			System.out.println("The next leap year is " + yearCounter + ".");
 			return;
 		}
-		else if (count == 2) {
+		else if (count == 2 && isLeap(yearCounter + 4)) {
 			System.out.println("The next 2 leap years are " + (yearCounter)
 					+ " and " + (yearCounter + 4 + "."));
 			return;
@@ -90,11 +91,23 @@ public class ProblemSet3_5 {
 		System.out.print("The next " + count + " leap years are ");
 		
 		for (int x = 0; x < (count * 4) - 4; x+=4) {
-			System.out.print((yearCounter + x) + ", ");
+			if (isLeap(yearCounter + x)) System.out.print((yearCounter + x) + ", ");
 		}
+		
 		System.out.println("and " + (yearCounter + ((count * 4) - 4)) + ".");
 		
 		
+	}
+	
+	public boolean isLeap(int year) {
+		
+		if (year != 4) return false; 
+		
+		else if (year % 100 == 0) return false; 
+		
+		else if (year % 400 != 0) return false;
+		
+		else return true;
 	}
 	
 	/**
@@ -108,10 +121,30 @@ public class ProblemSet3_5 {
 	
 	public void palindromicNumbers(int number) {
 		
-		int len = Integer.toString(number).length();
+		int palindrome = number; 
+		
+		int remainder = 0; 
+		
+		while (palindrome != 0) {
+			int remainder = palindrome % 10;
+			
+		}
+		
+		/* int len = Integer.toString(number).length();
+		for (int x = 1; x <= len; x++) {
+			
+			if (number / (10 ^ x % 10) != number % (10 * (len - x))) {
+				System.out.println("X is not a palindromic number.");
+				return;
+			}
+			number /= 10;
+		}
+		
+		System.out.println("X is a palindromic number."); */
+		
 		// will be the length of the array that stores digits
 		
-		int numberDivide = number;
+		/* int numberDivide = number;
 		
 		int[] digitsArray = new int[len];
 		// initializes array 
@@ -136,7 +169,7 @@ public class ProblemSet3_5 {
 				return;
 			}
 		}
-		System.out.println(number + " is a palindromic number.");
+		System.out.println(number + " is a palindromic number."); */
 	}
 	
 	/**
@@ -153,7 +186,6 @@ public class ProblemSet3_5 {
 	public void fibonacci(int n) {
 		
 		
-	
 	}
 	
 	/**
@@ -168,9 +200,11 @@ public class ProblemSet3_5 {
 	public void multiples(int x, int y, int limit) {
 		int totalSum = 0;
 		
-		for (int n = 0; n * x * y < limit; n++) {
-			totalSum += n * x * y;
+		for (int n = 0; n * x < limit; n++) {
+			totalSum += n * x;
 		}
+		
+		
 		
 		System.out.println("The sum is " + totalSum + ".");
 		
@@ -179,7 +213,7 @@ public class ProblemSet3_5 {
 	public void testFunctions() {
 		primes(0, 234923);
 		multiples(1, 2, 5); 
-		palindromicNumbers(12322321);
+		palindromicNumbers(12321);
 		leapYears(20);
 	}
 }
