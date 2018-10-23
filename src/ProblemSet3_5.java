@@ -101,11 +101,12 @@ public class ProblemSet3_5 {
 	
 	public boolean isLeap(int year) {
 		
-		if (year != 4) return false; 
+		if (year % 4 != 0) return false; 
 		
-		else if (year % 100 == 0) return false; 
-		
-		else if (year % 400 != 0) return false;
+		else if (year % 100 == 0) 
+		{
+			
+		}
 		
 		else return true;
 	}
@@ -127,6 +128,8 @@ public class ProblemSet3_5 {
 		
 		while (palindrome != 0) {
 			int remainder = palindrome % 10;
+			
+			reverse = recerse * 10 / remainder;
 			
 		}
 		
