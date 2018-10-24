@@ -23,7 +23,6 @@ public class ProblemSet3_5 {
 		
 		ps.testFunctions();
 		
-		// ps.primes(1, 1000);
 	}
 	
 	/**
@@ -40,25 +39,27 @@ public class ProblemSet3_5 {
 	public void primes(int start, int end) {
 		
 		int counter = 0;
-		boolean prime;
+		// boolean prime;
 		
 		for (int between = start; between <= end; between++) {
 			
-			prime = true;
-			
-			for (int factor = 2; factor * factor <= between; factor++) {
-				if(between % factor == 0) {
-					prime = false;
-					break;
-				}
-			}
-			
-			prime = (between < 2) ? false : prime;
-			
-			if (prime) counter++; 
+			if (isPrime(between)) counter++; 
 		}
 		
 		System.out.println("There " + ((counter == 1) ? "is 1 prime number." : "are " + counter + " prime numbers."));
+	}
+	
+	public boolean isPrime(int x) { // determines if number is boolean or not 
+		
+		if (x < 2) return false;
+		
+		for (int i = 2; i * i <= x; i++) {
+			
+			if (x % i == 0) return false; 
+		}
+		
+		return true; 
+		
 	}
 	
 	/**
@@ -72,41 +73,55 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void leapYears(int count) {
-		int yearCounter = 2018;
-		while (!isLeap(yearCounter)) {
-			yearCounter++;
-		}
 		
+		int newYear = 2018;
+		// this method has been created so it works for non 2018 values. 
+		
+		
+		while (!isLeap(newYear)) newYear++;
 		
 		if (count == 1) {
-			System.out.println("The next leap year is " + yearCounter + ".");
+			
+			System.out.println("The next leap year is " + newYear + ".");
+			
 			return;
 		}
-		else if (count == 2 && isLeap(yearCounter + 4)) {
-			System.out.println("The next 2 leap years are " + (yearCounter)
-					+ " and " + (yearCounter + 4 + "."));
+		
+		else if (count == 2 && isLeap(newYear + 4)) {
+			
+			System.out.println("The next 2 leap years are " + (newYear)
+					+ " and " + (newYear + 4) + ".");
+			
 			return;
+			
 		}
+		
 		
 		System.out.print("The next " + count + " leap years are ");
 		
-		for (int x = 0; x < (count * 4) - 4; x+=4) {
-			if (isLeap(yearCounter + x)) System.out.print((yearCounter + x) + ", ");
+		
+		for (int x = 0; x < 4 * (count - 2); x+=4) {
+			
+			if (isLeap(newYear + x)) System.out.print((newYear + x) + ", ");
+			else count++;
 		}
 		
-		System.out.println("and " + (yearCounter + ((count * 4) - 4)) + ".");
+		int finalYear = newYear + (count * 4 - 4);
+		
+		if (!isLeap(finalYear)) System.out.println("and " + (finalYear) + ".");
+		
+		else System.out.println((finalYear - 4) + ", and " + (finalYear) + ".");
 		
 		
 	}
 	
-	public boolean isLeap(int year) {
+	public boolean isLeap(int year) { // determines if a year is a leap year or not 
 		
 		if (year % 4 != 0) return false; 
 		
-		else if (year % 100 == 0) 
-		{
-			
-		}
+		else if (year % 400 == 0) return true;
+		
+		else if (year % 100 == 0) return false; 
 		
 		else return true;
 	}
@@ -124,55 +139,22 @@ public class ProblemSet3_5 {
 		
 		int palindrome = number; 
 		
-		int remainder = 0; 
+		int backwards = 0; 
 		
 		while (palindrome != 0) {
+			
 			int remainder = palindrome % 10;
 			
-			reverse = recerse * 10 / remainder;
+			backwards = backwards * 10  + remainder; 
+			// makes the number in reverse 
+			
+			palindrome /= 10; 
 			
 		}
 		
-		/* int len = Integer.toString(number).length();
-		for (int x = 1; x <= len; x++) {
-			
-			if (number / (10 ^ x % 10) != number % (10 * (len - x))) {
-				System.out.println("X is not a palindromic number.");
-				return;
-			}
-			number /= 10;
-		}
 		
-		System.out.println("X is a palindromic number."); */
+		System.out.println("X is " + ((number == backwards) ? "" : "not ") + "a palindromic number.");
 		
-		// will be the length of the array that stores digits
-		
-		/* int numberDivide = number;
-		
-		int[] digitsArray = new int[len];
-		// initializes array 
-		
-		
-		for (int index = 0; index < len; index++) {
-			
-		    digitsArray[index] = numberDivide % 10;
-		    
-		    numberDivide /= 10;
-		    
-		}
-		// for loop that stores each number in array 
-		
-		
-		for(int n = 0; n < len / 2; n++) {
-			
-			if(digitsArray[n] != digitsArray[len - 1 - n]) {
-				// if the opposite end numbers are unequal 
-				
-				System.out.println(number + " is not a palindromic number.");
-				return;
-			}
-		}
-		System.out.println(number + " is a palindromic number."); */
 	}
 	
 	/**
@@ -188,7 +170,31 @@ public class ProblemSet3_5 {
 	
 	public void fibonacci(int n) {
 		
+		int previous = 1, current = 1, next;
 		
+		for (int x = 0; x < n - 2; x++) {
+			next = previous + current;
+			previous = current;
+			current = next; 
+		}
+		
+		String suffix; 
+		
+		switch((n / 10 == 1) ? n : (n % 10)) {
+			case 1:
+				suffix = "st";
+				break;
+			case 2: 
+				suffix = "nd";
+				break;
+			case 3:
+				suffix = "rd"; 
+				break;
+			default:
+				suffix = "th";
+		}
+		
+		System.out.println("The " + n + suffix + " Fibonacci number is " + current + ".");
 	}
 	
 	/**
@@ -203,20 +209,26 @@ public class ProblemSet3_5 {
 	public void multiples(int x, int y, int limit) {
 		int totalSum = 0;
 		
-		for (int n = 0; n * x < limit; n++) {
-			totalSum += n * x;
+		for (int m = 0; m * x < limit; m++) {
+			totalSum += m * x;
 		}
 		
+		for (int n = 0; n * y < limit; n++) {
+			if (n % x != 0) totalSum += n * y;
+		}
 		
 		
 		System.out.println("The sum is " + totalSum + ".");
 		
 	}
 	
+	
 	public void testFunctions() {
 		primes(0, 234923);
 		multiples(1, 2, 5); 
-		palindromicNumbers(12321);
+		palindromicNumbers(14511541);
+		palindromicNumbers(1);
 		leapYears(20);
+		multiples(3, 5, 2000);
 	}
 }
