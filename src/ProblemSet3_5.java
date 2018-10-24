@@ -74,6 +74,11 @@ public class ProblemSet3_5 {
 	
 	public void leapYears(int count) {
 		
+		if (count <= 0) {
+			System.out.println("I don't know how to compute the next " + count + " leap years...");
+			return;
+		}
+		
 		int newYear = 2018;
 		// this method has been created so it works for non 2018 values. 
 		
@@ -104,11 +109,16 @@ public class ProblemSet3_5 {
 			
 			if (isLeap(newYear + x)) System.out.print((newYear + x) + ", ");
 			else count++;
+			/* loop to add 4 until the last two years
+			 * if it doesn't follow the condition, though adds 1 to count
+			 */
 		}
 		
 		int finalYear = newYear + (count * 4 - 4);
+		// so that the "and" is consistent 
 		
 		if (!isLeap(finalYear)) System.out.println("and " + (finalYear) + ".");
+		// in the rare case that the last number is 2100 or something like that
 		
 		else System.out.println((finalYear - 4) + ", and " + (finalYear) + ".");
 		
@@ -125,6 +135,7 @@ public class ProblemSet3_5 {
 		
 		else return true;
 	}
+	
 	
 	/**
 	 * Is @number a palindromic number?
@@ -153,9 +164,10 @@ public class ProblemSet3_5 {
 		}
 		
 		
-		System.out.println("X is " + ((number == backwards) ? "" : "not ") + "a palindromic number.");
+		System.out.println(number + " is " + ((number == backwards) ? "" : "not ") + "a palindromic number.");
 		
 	}
+	
 	
 	/**
 	 * What is the @nth Fibonacci number, where @n is a positive integer?
@@ -170,7 +182,7 @@ public class ProblemSet3_5 {
 	
 	public void fibonacci(int n) {
 		
-		int previous = 1, current = 1, next;
+		long previous = 1, current = 1, next;
 		
 		for (int x = 0; x < n - 2; x++) {
 			next = previous + current;
@@ -207,18 +219,18 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void multiples(int x, int y, int limit) {
-		int totalSum = 0;
+		long sum = 0;
 		
-		for (int m = 0; m * x < limit; m++) {
-			totalSum += m * x;
+		for (int m = 0; m < limit; m++) {
+			
+			if (m % x == 0 || m % y == 0) {
+				
+				sum += m;
+			}
 		}
 		
-		for (int n = 0; n * y < limit; n++) {
-			if (n % x != 0) totalSum += n * y;
-		}
 		
-		
-		System.out.println("The sum is " + totalSum + ".");
+		System.out.println("The sum of all multiples of " + x + " and " + y + " less than " + limit + " is " + sum + ".");
 		
 	}
 	
