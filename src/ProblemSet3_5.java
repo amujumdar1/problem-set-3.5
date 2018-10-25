@@ -92,7 +92,7 @@ public class ProblemSet3_5 {
 			return;
 		}
 		
-		else if (count == 2 && isLeap(newYear + 4)) {
+		else if (count == 2) {
 			
 			System.out.println("The next 2 leap years are " + (newYear)
 					+ " and " + (newYear + 4) + ".");
@@ -236,7 +236,7 @@ public class ProblemSet3_5 {
 	
 	
 	public void testFunctions() {
-		primes(0, 234923);
+		primes(1, 342342);
 		multiples(1, 2, 5); 
 		palindromicNumbers(14511541);
 		palindromicNumbers(1);
